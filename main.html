@@ -1,16 +1,113 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .calculator {
+            display: inline-block;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: right;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .button {
+            width: 60px;
+            height: 60px;
+            margin: 5px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #ddd;
+        }
+        .button.operation {
+            background-color: #ffcc00;
+        }
+        .button.operation:hover {
+            background-color: #e6b800;
+        }
+        .button.clear {
+            background-color: #ff6666;
+        }
+        .button.clear:hover {
+            background-color: #e65c5c;
+        }
+    </style>
+    <script>
+        let expression = "";
+
+        function appendValue(value) {
+            expression += value;
+            document.getElementById('input').value = expression;
+        }
+
+        function calculate() {
+            try {
+                const result = eval(expression);
+                document.getElementById('input').value = result;
+                expression = result.toString();
+            } catch (error) {
+                document.getElementById('input').value = "Error";
+                expression = "";
+            }
+        }
+
+        function clearInput() {
+            expression = "";
+            document.getElementById('input').value = "";
+        }
+    </script>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
-
+    <div class="calculator">
+        <input type="text" id="input" readonly>
+        <div>
+            <button id="block7" class="button" onclick="appendValue('7')">7</button>
+            <button id="block8" class="button" onclick="appendValue('8')">8</button>
+            <button id="block9" class="button" onclick="appendValue('9')">9</button>
+            <button id="divide" class="button operation" onclick="appendValue('/')">/</button>
+        </div>
+        <div>
+            <button id="block4" class="button" onclick="appendValue('4')">4</button>
+            <button id="block5" class="button" onclick="appendValue('5')">5</button>
+            <button id="block6" class="button" onclick="appendValue('6')">6</button>
+            <button id="multiply" class="button operation" onclick="appendValue('*')">*</button>
+        </div>
+        <div>
+            <button id="block1" class="button" onclick="appendValue('1')">1</button>
+            <button id="block2" class="button" onclick="appendValue('2')">2</button>
+            <button id="block3" class="button" onclick="appendValue('3')">3</button>
+            <button id="minus" class="button operation" onclick="appendValue('-')">-</button>
+        </div>
+        <div>
+            <button id="block0" class="button" onclick="appendValue('0')">0</button>
+            <button id="dot" class="button" onclick="appendValue('.')">.</button>
+            <button id="ans" class="button operation" onclick="calculate()">=</button>
+            <button id="plus" class="button operation" onclick="appendValue('+')">+</button>
+        </div>
+        <button id="clr" class="button clear" onclick="clearInput()">C</button>
+    </div>
 </body>
-
 </html>
+
+
